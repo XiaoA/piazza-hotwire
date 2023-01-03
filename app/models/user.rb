@@ -6,4 +6,13 @@ class User < ApplicationRecord
 
   has_many :memberships, dependent: :destroy
   has_many :organizations, through: :memberships
+
+  before_validation :strip_whitespace
+
+  private
+
+  def strip_whitespace
+    self.name = self.name&.strip
+    self.email = self.email&.strip
+  end
 end

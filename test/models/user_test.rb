@@ -29,4 +29,14 @@ class UserTest < ActiveSupport::TestCase
     )
     assert_not @user.valid?
   end
+
+  test "name and email fields do not contain whitespaces" do
+    @user = User.create(
+      name: " Andrew ",
+      email: " andrew@example.com ",
+    )
+
+    assert_equal "Andrew", @user.name
+    assert_equal "andrew@example.com", @user.email
+  end
 end
