@@ -9,6 +9,11 @@ class User < ApplicationRecord
 
   before_validation :strip_whitespace
 
+  has_secure_password
+  validates :password,
+    presence: true,
+    length: { minimum: 8 }
+
   private
 
   def strip_whitespace
