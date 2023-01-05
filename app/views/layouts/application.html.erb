@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "application/flashes" %>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

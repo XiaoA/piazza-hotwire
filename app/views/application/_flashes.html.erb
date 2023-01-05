@@ -1,0 +1,8 @@
+<div class="container is-fluid" data-turbo-cache="false">
+  <% flash.each do |level, message| %>
+    <%= tag.div \
+    class: "notification is-#{level} is-light has-text-centered mt-4" do %>
+      <%= message %>
+    <% end %>
+  <% end %>
+</div>
