@@ -96,6 +96,8 @@ GEM
       activesupport (>= 5.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
     io-console (0.6.0)
     irb (1.6.2)
       reline (>= 0.3.0)
@@ -225,6 +227,7 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  i18n-debug
   jbuilder
   jsbundling-rails
   minitest-reporters (~> 1.5)
