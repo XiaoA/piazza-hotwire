@@ -6,7 +6,7 @@ class UserTest < ActiveSupport::TestCase
       name: "",
       email: "andrew@example.com",
       password: "password",
-      password: "password",
+      password_confirmation: "password",
     )
 
     assert_not @user.valid?
@@ -73,5 +73,30 @@ class UserTest < ActiveSupport::TestCase
     max_length = ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
     @user.password = @user.password_confirmation = "a" * (max_length + 1)
     assert_not @user.valid?
+  end
+
+  test "can create a session with email and correct password" do
+    @app_session = User.create_app_session(
+      email: "yoda@example.com",
+      password: "password",
+    )
+    assert_not_nil @app_session
+    assert_not_nil @app_session.token
+  end
+
+  test "cannot create a session with email and incorrect password" do
+    @app_session = User.create_app_session(
+      email: "yoda@example.com",
+      password: "wrongpassword",
+    )
+    assert_nil @app_session
+  end
+
+  test "creating a session with invalid email returns nil" do
+    @app_session = User.create_app_session(
+      email: "invalid@example.com",
+      password: "wrongpassword",
+    )
+    assert_nil @app_session
   end
 end
