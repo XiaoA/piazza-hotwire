@@ -6,6 +6,7 @@ class UserTest < ActiveSupport::TestCase
       name: "",
       email: "andrew@example.com",
       password: "password",
+      password: "password",
     )
 
     assert_not @user.valid?
@@ -16,6 +17,7 @@ class UserTest < ActiveSupport::TestCase
       name: "Andrew",
       email: "",
       password: "password",
+      password_confirmation: "password"
     )
     assert_not @user.valid?
 
@@ -31,6 +33,7 @@ class UserTest < ActiveSupport::TestCase
       name: "Andrew",
       email: "andrew@example.com",
       password: "password",
+      password_confirmation: "password",
     )
     assert @existing_user.persisted?
 
@@ -38,6 +41,7 @@ class UserTest < ActiveSupport::TestCase
       name: "Drew",
       email: "andrew@example.com",
       password: "password",
+      password_confirmation: "password"
     )
     assert_not @user.valid?
   end
@@ -47,6 +51,7 @@ class UserTest < ActiveSupport::TestCase
       name: " Andrew ",
       email: " andrew@example.com ",
       password: "password",
+      password_confirmation: "password",
     )
 
     assert_equal "Andrew", @user.name
@@ -57,15 +62,16 @@ class UserTest < ActiveSupport::TestCase
     @user = User.new(
       name: "Sherlock",
       email: "sherlock@example.com",
-      password: ""
+      password: "",
+      password_confirmation: "",
     )
     assert_not @user.valid?
 
-    @user.password = "password"
+    @user.password = @user.password_confirmation = "password"
     assert @user.valid?
 
     max_length = ActiveModel::SecurePassword::MAX_PASSWORD_LENGTH_ALLOWED
-    @user.password = "a" * (max_length + 1)
+    @user.password = @user.password_confirmation = "a" * (max_length + 1)
     assert_not @user.valid?
   end
 end

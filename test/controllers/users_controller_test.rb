@@ -6,18 +6,19 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_difference [ "User.count", "Organization.count" ], 1 do
-      post sign_up_path, params {
+      post sign_up_path, params: {
         user: {
           name: "Name",
           email: "email@example.com",
-          password: "password"
+          password: "password",
+          password_confirmation: "password",
         }
       }
     end
 
     assert_redirected_to root_path
     follow_redirect!
-    asert_select ".notification.is-success",
+    assert_select ".notification.is-success",
       text: I18n.t("users.create.welcome", name: "Name")             
   end
 
@@ -26,16 +27,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert_response :ok
 
     assert_no_difference [ "User.count", "Organization.count" ] do
-      post sign_up_path, params {
+      post sign_up_path, params: {
         user: {
           name: "Name",
           email: "email@example.com",
-          password: "pass"
+          password: "pass",
+          password_confirmation: "pass",
         }
       }
     end
 
-    asert_response :unprocessable_entity
+    assert_response :unprocessable_entity
     assert_select "p.is-danger",
       text:
         I18n.t
