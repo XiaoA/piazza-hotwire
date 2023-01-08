@@ -1,0 +1,8 @@
+en:
+  sessions:
+    new:
+      title: Log In
+      submit: Login
+    create:
+      success: You're logged in!
+      incorrect_details: The mail or password was incorrect. Please try again.
