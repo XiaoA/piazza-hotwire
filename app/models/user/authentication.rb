@@ -15,7 +15,7 @@ module User::Authentication
   end
 
   class_methods do
-    def self.create_app_session(email:, password:)
+    def create_app_session(email:, password:)
       return nil unless user = User.find_by(email: email.downcase)
 
       user.app_sessions.create if user.authenticate(password)
