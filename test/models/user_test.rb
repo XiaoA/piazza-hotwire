@@ -99,4 +99,18 @@ class UserTest < ActiveSupport::TestCase
     )
     assert_nil @app_session
   end
+
+  test "authenticates with a valid session id and token" do
+    @user = users(:yoda)
+    @app_session = @user.app_sessions.create
+
+    assert_equal @app_session,
+    @user.authenticate_app_session(@app_session.id, @app_session.token)
+  end
+
+  test "authentication fails with invalid token" do
+    @user = users(:yoda)
+
+    assert_not @user.authenticate_app_session(50, "token")
+  end
 end

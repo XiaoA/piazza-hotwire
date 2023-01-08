@@ -17,6 +17,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to root_path
+    assert_not_empty cookies[:app_session]
+
     follow_redirect!
     assert_select ".notification.is-success",
       text: I18n.t("users.create.welcome", name: "Name")             
