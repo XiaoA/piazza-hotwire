@@ -1,0 +1,11 @@
+en:
+  shared:
+    navbar:
+      create_ad: Create Ad
+      messages: Messages
+      sign_up: Sign Up
+      login: Login
+      profile: Profile
+      my_ads: My Ads
+      saved_ads: Saved Ads
+      Logout: Log out

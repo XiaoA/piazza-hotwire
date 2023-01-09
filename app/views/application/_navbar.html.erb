@@ -1,0 +1,63 @@
+<nav class="navbar is-link">
+  <div class="navbar-brand">
+    <%= link_to root_path, class: "navbar-item" do %>
+      <strong class="is-size-3">Piazza</strong>
+    <% end %>
+    <a role="button"
+      class="navbar-burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+  <navbar-menu class="navbar-menu">
+    <div class="navbar-start">
+      <%= link_to t(".create_ad"),
+       "#",
+       class: "navbar-item" %>
+      <%= link_to t(".messages"),
+       "#",
+       class: "navbar-item" if logged_in? %>
+    </div>
+    
+    <div class="navbar-end">
+      <%= tag.div \
+      class: "navbar-item has-dropdown
+is-hoverable mr-4" do %>
+        <%= link_to Current.user.name,
+            "#",
+             class: "navbar-link" %>
+        
+        <div class="navbar-dropdown is-right">
+          <%= link_to t(".profile"),
+           "#",
+           class: "navbar-item" %>
+          <%= link_to t(".my_ads"),
+           "#",
+           class: "navbar-item" %>
+          <%= link_to t(".saved_ads"),
+           "#",
+           class: "navbar-item" %>
+          
+          <hr class="navbar-divider">
+          
+          <%= link_to t(".logout"),
+           "#",
+           class: "navbar-item" %>
+        </div>
+      <% end if logged_in? %>
+      
+      <%= tag.div class: "navbar-item" do %>
+        <div class="buttons">
+          <%= link_to t(".sign_up"),
+           sign_up_path,
+           class: "button is-primary" %>
+          
+          <%= link_to t(".login"),
+           login_path,
+           class: "button is-light" %>
+        </div>
+      <% end unless logged_in? %>
+    </div>
+  </navbar-menu>
+</nav>
