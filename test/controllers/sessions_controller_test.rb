@@ -24,4 +24,15 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_select ".notification",
                   I18n.t("sessions.create.incorrect_details")
   end
+
+  test "logging out redirects to the root url and deletes the session" do
+    log_in(@user)
+
+    assert_difference("@user.app_sessions.count", -1) { log_out }
+    assert_redirected_to root_path
+
+    follow_redirect!
+    assert_select ".notification",
+                  I18n.t("sessions.destroy.success")
+  end
 end

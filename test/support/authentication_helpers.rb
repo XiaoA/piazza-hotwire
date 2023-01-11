@@ -7,4 +7,8 @@ module AuthenticationHelpers
            }
          }
   end
+
+  def log_out
+    delete logout_path
+  end
 end
